@@ -1,47 +1,65 @@
 import SwiftUI
 import CoreData
 
-struct Tab: Identifiable {
-    var id: UUID = UUID()
-    var browserTab: BrowserPage = BrowserPage()
-}
 
+class TabList: ObservableObject {
+    @Published var tabs: [BrowserPage] = [BrowserPage()]
+    
+    func newTab(){
+        tabs.append(BrowserPage())
+    }
+    
+}
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-//    @State var isShowingBookmarks: Bool = false
-    var tabs: [Tab] = [Tab()]
+    @StateObject var tablist: TabList = TabList()
+    
+    @State var selection = 0
+    @State var showTabs: Bool = false
+
     var body: some View {
         VStack {
-            TabView {
-                ForEach(tabs){ tab in
-                    tab.browserTab
-                        .tabItem { Image(systemName: "heart") }
+          
+            tablist.tabs[selection]
+            Button("next") {
+                withAnimation {
+                    selection = (selection + 1) % tablist.tabs.count
                 }
             }
-            .tabViewStyle(PageTabViewStyle())
-            .onAppear() {
-                UITabBar.appearance().barTintColor = .systemBackground
+            Divider()
+            Button("add") {
+                withAnimation {
+                    tablist.newTab()
+                    selection = tablist.tabs.count - 1
+                    
+                }
             }
-            
+            Divider()
+            Text("\(selection)")
+            Text("\(tablist.tabs.count)")
             
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-//        .sheet(isPresented: $isShowingBookmarks, content: {
-//            BookmarksView()
-//        })
+        .sheet(isPresented: $showTabs, content: {
+            
+        })
+        
         
     }
+    
+    
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .previewDevice("iPhone 12 Pro")
-        
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
-            .previewDevice("iPhone 12 Pro")
-    }
-}
+
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext, )
+//            .previewDevice("iPhone 12 Pro")
+//
+//        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .previewDevice("iPhone 12 Pro")
+//    }
+//}

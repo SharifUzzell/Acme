@@ -1,99 +1,174 @@
+//
+//  WebView.swift
+//  SwiftUIWebView
+//
+//  Created by Md. Yamin on 4/25/20.
+//  Copyright © 2020 Md. Yamin. All rights reserved.
+//
+
+import Foundation
+import UIKit
 import SwiftUI
+import Combine
 import WebKit
 
+protocol WebViewHandlerDelegate {
+    func receivedJsonValueFromWebView(value: [String: Any?])
+    func receivedStringValueFromWebView(value: String)
+}
 
-struct WebKit: UIViewRepresentable{
-    let request: URLRequest
-    @Binding var isReloading: Bool
-    @Binding var boundTitle: String
-    @Binding var goBack: Bool
-    @Binding var goForward: Bool
+struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
+   
+    func receivedJsonValueFromWebView(value: [String : Any?]) {
+        print("JSON value received from web is: \(value)")
+    }
     
-    func makeUIView(context: UIViewRepresentableContext<WebKit>) -> WKWebView {
-        let wv = WKWebView()
-        return wv
+    func receivedStringValueFromWebView(value: String) {
+        print("String value received from web is: \(value)")
+    }
+    
+    @ObservedObject var viewModel: WebViewModel
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIView(context: Context) -> WKWebView {
+        let preferences = WKPreferences()
+        let configuration = WKWebViewConfiguration()
+        configuration.userContentController.add(self.makeCoordinator(), name: "iOSNative")
+        configuration.preferences = preferences
+        
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.navigationDelegate = context.coordinator
+        
+        //remove after debugging...
+        webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.isScrollEnabled = true
+        webView.load(URLRequest(url: URL(string: viewModel.url)!))
+        print("UUUUUUUUUUUUUUUUUUUUU " + viewModel.url)
+        return webView
     }
     
     
-    func updateUIView(_ uiView: WKWebView, context: Context) {
+    func updateUIView(_ webView: WKWebView, context: Context) {
+    }
+    
+    class Coordinator : NSObject, WKNavigationDelegate {
+        var parent: WebView
+        var valueSubscriber: AnyCancellable? = nil
+        var webViewNavigationSubscriber: AnyCancellable? = nil
+        var delegate: WebViewHandlerDelegate?
         
-        
-        if(goBack){
-            goBack = false
-            if(uiView.backForwardList.backItem != nil){
-                uiView.load(URLRequest(url:uiView.backForwardList.backItem!.url))
-            }
-            
-            
-        }else if(goForward){
-            goForward = false
-            if(uiView.backForwardList.forwardItem != nil){
-                uiView.load(URLRequest(url:uiView.backForwardList.forwardItem!.url))
-            }
-        }else if(isReloading){
-            isReloading = false
-            uiView.reload()
-        }else{
-//            uiView.evaluateJavaScript("document.title") { (response, error) in
-//                if let error = error {
-//                    print("Error getting title")
-//                    print(error.localizedDescription)
-//                }else{
-//                    boundTitle = response as! String
-//                }
-//            }
-            
-            uiView.load(request)
-            
+        init(_ uiWebView: WebView) {
+            self.parent = uiWebView
         }
         
+        deinit {
+            valueSubscriber?.cancel()
+            webViewNavigationSubscriber?.cancel()
+        }
+        
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            // Get the title of loaded webcontent
+            webView.evaluateJavaScript("document.title") { (response, error) in
+                if let error = error {
+                    print("Error getting title")
+                    print(error.localizedDescription)
+                }
+                
+                guard let title = response as? String else {
+                    return
+                }
+                
+                self.parent.viewModel.showWebTitle.send(title)
+                
+                guard let url = webView.url else {
+                    return
+                }
+              
+                print("OUHFOUSDOHSOFHOSFHIOUSHJFOSHFOFHOSHFOUIH    " + url.absoluteString)
+                
+            }
+            
+            valueSubscriber = parent.viewModel.valuePublisher.receive(on: RunLoop.main).sink(receiveValue: { value in
+                let javascriptFunction = "valueGotFromIOS(\(value));"
+                webView.evaluateJavaScript(javascriptFunction) { (response, error) in
+                    if let error = error {
+                        print("Error calling javascript:valueGotFromIOS()")
+                        print(error.localizedDescription)
+                    } else {
+                        print("Called javascript:valueGotFromIOS()")
+                    }
+                }
+            })
+            
+            // Page loaded so no need to show loader anymore
+            self.parent.viewModel.showLoader.send(false)
+        }
+        
+        /* Here I implemented most of the WKWebView's delegate functions so that you can know them and
+         can use them in different necessary purposes */
+        
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            // Hides loader
+            parent.viewModel.showLoader.send(false)
+        }
+        
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            // Hides loader
+            parent.viewModel.showLoader.send(false)
+        }
+        
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            parent.viewModel.url = webView.url!.absoluteString
+            // Shows loader
+            parent.viewModel.showLoader.send(true)
+        }
+        
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            // Shows loader
+            parent.viewModel.showLoader.send(true)
+            self.webViewNavigationSubscriber = self.parent.viewModel.webViewNavigationPublisher.receive(on: RunLoop.main).sink(receiveValue: { navigation in
+                switch navigation {
+                case .backward:
+                    if webView.canGoBack {
+                        webView.goBack()
+                    }
+                case .forward:
+                    if webView.canGoForward {
+                        webView.goForward()
+                    }
+                case .reload:
+                    webView.reload()
+                case .load:
+                    webView.load(URLRequest(url: URL(string: self.parent.viewModel.url)!))
+                    print("IIIIIIIIIIIIIIIIIIIII  " +  self.parent.viewModel.url)
+                }
+                
+            })
+        }
+        
+        // This function is essential for intercepting every navigation in the webview
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            // Suppose you don't want your user to go a restricted site
+            // Here you can get many information about new url from 'navigationAction.request.description'
+            decisionHandler(.allow)
+        }
     }
 }
 
-struct websiteView: View {
-    @Binding var Title: String
-    @Binding var urlString: String
-    @Binding var isReloading: Bool
-    @Binding var goBack: Bool
-    @Binding var goForward: Bool
-    
-    var body: some View {
-        WebKit(request: URLRequest(url: formatURL(url: urlString.lowercased())), isReloading: $isReloading, boundTitle: $Title, goBack: $goBack, goForward: $goForward)
-    }
-    
-    func formatURL(url: String) -> URL {
-        var recievedURL: String = url
-        
-        if(!url.isEmpty){
-            //rudimentary but it works for simple cases where the user only types the last part of
-            //a url
-            if url.starts(with: "https://www.") || url.starts(with: "http://www."){
-                //DO NOTHING, URL IS FINE
-            }else if url.starts(with: "www."){
-                recievedURL = "https://" + url
-            }else{
-                recievedURL = "https://www.google.com/search?q=" + url.replacingOccurrences(of: " ", with: "%20")
+// MARK: - Extensions
+extension WebView.Coordinator: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        // Make sure that your passed delegate is called
+        if message.name == "iOSNative" {
+            if let body = message.body as? [String: Any?] {
+                delegate?.receivedJsonValueFromWebView(value: body)
+            } else if let body = message.body as? String {
+                delegate?.receivedStringValueFromWebView(value: body)
             }
-            
-        }
-        if URL(string: recievedURL) != nil {
-            return URL(string: recievedURL)!
-        }else{
-            return URL(string: "https://neeva.com")!
         }
     }
-    
 }
 
-
-
-struct websiteView_Previews: PreviewProvider {
-    static var previews: some View {
-        let url: Binding = .constant("")
-        let title: Binding = .constant("Google")
-        let bool: Binding = .constant(false)
-        let goBack: Binding = .constant(false)
-        let goForward: Binding = .constant(false)
-        websiteView(Title: title, urlString: url, isReloading: bool, goBack: goBack, goForward: goForward)
-    }
-}

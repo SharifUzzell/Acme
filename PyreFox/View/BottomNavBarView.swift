@@ -6,11 +6,8 @@
 //
 
 import SwiftUI
-
 struct BottomNavBarView: View {
-    @Binding var goBack: Bool
-    @Binding var goForward: Bool
-    
+    @ObservedObject var viewModel: WebViewModel
     var body: some View {
         HStack {
             Spacer()
@@ -18,7 +15,7 @@ struct BottomNavBarView: View {
                 HStack {
                     Button(action:{
                         print("LEFT:")
-                        goBack = true
+                        viewModel.webViewNavigationPublisher.send(.backward)
                     }) {
                         Image(systemName: "arrow.backward")
                             .font(.system(size:30))
@@ -26,12 +23,12 @@ struct BottomNavBarView: View {
                             .padding(5)
                         
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 15)
+                    .padding(.leading, 5)
+                    
                     
                     Button(action:{
                         print("RIGHT:")
-                        goForward = true
+                        viewModel.webViewNavigationPublisher.send(.forward)
                     }) {
                         Image(systemName: "arrow.forward")
                             .font(.system(size:30))
@@ -39,32 +36,53 @@ struct BottomNavBarView: View {
                             .padding(5)
                     }
                     .padding(5)
+                    .padding(.vertical, 5)
+
                     Spacer()
+                    
+                    HStack{
+                        Button(action:{
+                            print("TAB:")
+                        }) {
+                            Image(systemName: "square.fill.on.square")
+                                .font(.system(size: 35))
+                                .foregroundColor(Color.accentColor)
+                                .padding(5)
+                        }
+                    }
                 }
+                
                 Button(action:{
                     print("PLUS:")
+                    
                 }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 35))
                         .foregroundColor(Color.accentColor)
                         .padding(5)
                 }
+                Spacer()
+                
+                
             }
             Spacer()
         }
     }
 }
 
-struct BottomNavBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        let goBack: Binding = .constant(false)
-        let goForward: Binding = .constant(false)
-        
-        BottomNavBarView(goBack: goBack, goForward: goForward)
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
-        BottomNavBarView(goBack: goBack, goForward: goForward)
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro")) 
-            .preferredColorScheme(.dark)
-        
-    }
-}
+//
+//
+//struct BottomNavBarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let test : ViewModel = ViewModel()
+//
+//        BottomNavBarView(viewModel: test).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//            .previewDevice("iPhone 12 Pro")
+//
+//        BottomNavBarView(viewModel: test).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .previewDevice("iPhone 12 Pro")
+//    }
+//}
+//
+//

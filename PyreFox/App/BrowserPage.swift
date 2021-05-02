@@ -1,53 +1,35 @@
 
 import SwiftUI
-struct TabInfoStruct: Identifiable {
-    var id: UUID
-    var url: String
-    var title: String
-    var isBookmarked: Bool
-    var isReloading: Bool
-    var goBack: Bool
-    var goForward: Bool
-    init() {
-        id = UUID.init()
-        url = ""
-        title = "Neeva"
-        isBookmarked = false
-        isReloading = false
-        goBack =  false
-        goForward =  false
-    }
-}
 
-class TabInfo: ObservableObject {
-    @Published var info: TabInfoStruct = TabInfoStruct()
-}
-
-struct BrowserPage: View {
-    @ObservedObject var observableInfo = TabInfo()
+struct BrowserPage: View, Identifiable{
+  
+    let id: UUID = UUID()
+    
+    @ObservedObject var viewModel = WebViewModel()
+    
     var body: some View {
         VStack{
-            URLBarView(urlString: $observableInfo.info.url, urlTitle: $observableInfo.info.title, isBookmarked: $observableInfo.info.isBookmarked, isReloading: $observableInfo.info.isReloading)
+            URLBarView(viewModel: viewModel)
             
             HStack{
-                websiteView(Title: $observableInfo.info.title, urlString: $observableInfo.info.url, isReloading: $observableInfo.info.isReloading, goBack: $observableInfo.info.goBack, goForward: $observableInfo.info.goForward)
+                WebView(viewModel: viewModel)
             }
-            HStack {
-                BottomNavBarView(goBack: $observableInfo.info.goBack, goForward: $observableInfo.info.goForward)
-            }
-            .padding(.bottom, 18)
-            Spacer()
+            
+            BottomNavBarView(viewModel: viewModel)
+                .padding(.bottom, 25)
+           
         }
+        
         
     }
 }
 
-struct BrowserPage_Previews: PreviewProvider {
-    static var previews: some View {
-        BrowserPage()
-        
-        
-        BrowserPage()
-            .preferredColorScheme(.dark)
-    }
-}
+
+//struct BrowserPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BrowserPage()
+//
+//        BrowserPage()
+//            .preferredColorScheme(.dark)
+//    }
+//}

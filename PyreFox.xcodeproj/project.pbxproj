@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D32B12C263128A400DEA50A /* BottomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32B12B263128A400DEA50A /* BottomNavBarView.swift */; };
+		0D32B1372636155900DEA50A /* webViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32B1362636155900DEA50A /* webViewComponents.swift */; };
 		0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD829262C000900B6F38D /* websiteView.swift */; };
 		0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */; };
 		0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD852262D42F100B6F38D /* BrowserPage.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0D32B12B263128A400DEA50A /* BottomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBarView.swift; sourceTree = "<group>"; };
+		0D32B1362636155900DEA50A /* webViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewComponents.swift; sourceTree = "<group>"; };
 		0D9BD829262C000900B6F38D /* websiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = websiteView.swift; sourceTree = "<group>"; };
 		0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBarView.swift; sourceTree = "<group>"; };
 		0D9BD852262D42F100B6F38D /* BrowserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserPage.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				0DC531502623CB5B00095F31 /* Persistence.swift */,
 				0DC531522623CB5B00095F31 /* PyreFox.xcdatamodeld */,
+				0D32B1362636155900DEA50A /* webViewComponents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */,
 				0DA35E282624151300FF2A98 /* BookmarksViewRow.swift in Sources */,
 				0DA35E23262400DC00FF2A98 /* BookmarksView.swift in Sources */,
+				0D32B1372636155900DEA50A /* webViewComponents.swift in Sources */,
 				0DC531482623CB5A00095F31 /* PyreFoxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

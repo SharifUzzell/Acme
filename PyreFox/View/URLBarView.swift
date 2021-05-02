@@ -1,16 +1,8 @@
 import SwiftUI
 
 struct URLBarView: View {
-    @Binding var urlString: String
-    @Binding var urlTitle: String
-    @Binding var isBookmarked: Bool
-    @Binding var isReloading: Bool
-    
-    //This ensures we don't update the url too early before submission of
-    //the text
+    @ObservedObject var viewModel: WebViewModel
     @State var urltoEdit: String = ""
-    
-    
     var body: some View {
         VStack {
             HStack{
@@ -25,11 +17,10 @@ struct URLBarView: View {
                         .font(.footnote)
                         .keyboardType(.webSearch)
                  
-                    
                     Spacer()
                     //Add current text val to bookmarks
                     Button(action:{
-                        isReloading = true
+                        viewModel.webViewNavigationPublisher.send(.reload)
                     }) {
                         Image(systemName: "arrow.clockwise")
                             .font(.system(size:16))
@@ -55,22 +46,12 @@ struct URLBarView: View {
     }
     
     func commitURL(){
+        
         if !urltoEdit.isEmpty{
-            urlString = urltoEdit.lowercased()
-            print("committed url \(urlString)")
+            viewModel.url = urltoEdit
+            viewModel.webViewNavigationPublisher.send(WebViewNavigation.load)
+            print("ON COMITT SNLJKDJSHDJLKSDJKSHDJK")
         }
     }
 }
 
-struct URLBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        let url: Binding = .constant("www.google.com")
-        let title: Binding = .constant("Google")
-        let isBookm: Binding = .constant(false)
-        let bool: Binding = .constant(false)
-
-        URLBarView(urlString: url, urlTitle: title, isBookmarked: isBookm, isReloading: bool)
-        URLBarView(urlString: url, urlTitle: title, isBookmarked: isBookm, isReloading: bool)
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
-    }
-}
