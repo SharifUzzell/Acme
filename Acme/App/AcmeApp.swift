@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct PyreFoxApp: App {
+struct AcmeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
