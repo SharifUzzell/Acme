@@ -8,40 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		0D32B12C263128A400DEA50A /* BottomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32B12B263128A400DEA50A /* BottomNavBarView.swift */; };
-		0D32B1372636155900DEA50A /* webViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32B1362636155900DEA50A /* webViewComponents.swift */; };
+		0D32B1372636155900DEA50A /* webViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32B1362636155900DEA50A /* webViewModel.swift */; };
 		0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD829262C000900B6F38D /* websiteView.swift */; };
 		0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */; };
 		0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD852262D42F100B6F38D /* BrowserPage.swift */; };
-		0DA35E23262400DC00FF2A98 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA35E22262400DC00FF2A98 /* BookmarksView.swift */; };
-		0DA35E282624151300FF2A98 /* BookmarksViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA35E272624151300FF2A98 /* BookmarksViewRow.swift */; };
-		0DA35E2F262811F200FF2A98 /* BookmarkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA35E2E262811F200FF2A98 /* BookmarkCheck.swift */; };
-		0DA35E332628142100FF2A98 /* Bookmark+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA35E312628142100FF2A98 /* Bookmark+CoreDataClass.swift */; };
-		0DA35E342628142100FF2A98 /* Bookmark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA35E322628142100FF2A98 /* Bookmark+CoreDataProperties.swift */; };
 		0DC531482623CB5A00095F31 /* PyreFoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531472623CB5A00095F31 /* PyreFoxApp.swift */; };
 		0DC5314A2623CB5A00095F31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531492623CB5A00095F31 /* ContentView.swift */; };
 		0DC5314C2623CB5B00095F31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC5314B2623CB5B00095F31 /* Assets.xcassets */; };
 		0DC5314F2623CB5B00095F31 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC5314E2623CB5B00095F31 /* Preview Assets.xcassets */; };
-		0DC531512623CB5B00095F31 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531502623CB5B00095F31 /* Persistence.swift */; };
 		0DC531542623CB5B00095F31 /* PyreFox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531522623CB5B00095F31 /* PyreFox.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D32B12B263128A400DEA50A /* BottomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBarView.swift; sourceTree = "<group>"; };
-		0D32B1362636155900DEA50A /* webViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewComponents.swift; sourceTree = "<group>"; };
+		0D32B1362636155900DEA50A /* webViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewModel.swift; sourceTree = "<group>"; };
 		0D9BD829262C000900B6F38D /* websiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = websiteView.swift; sourceTree = "<group>"; };
 		0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBarView.swift; sourceTree = "<group>"; };
 		0D9BD852262D42F100B6F38D /* BrowserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserPage.swift; sourceTree = "<group>"; };
-		0DA35E22262400DC00FF2A98 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
-		0DA35E272624151300FF2A98 /* BookmarksViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewRow.swift; sourceTree = "<group>"; };
-		0DA35E2E262811F200FF2A98 /* BookmarkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCheck.swift; sourceTree = "<group>"; };
-		0DA35E312628142100FF2A98 /* Bookmark+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Bookmark+CoreDataClass.swift"; path = "PyreFox/Bookmark+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0DA35E322628142100FF2A98 /* Bookmark+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Bookmark+CoreDataProperties.swift"; path = "PyreFox/Bookmark+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0DC531442623CB5A00095F31 /* PyreFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyreFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC531472623CB5A00095F31 /* PyreFoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyreFoxApp.swift; sourceTree = "<group>"; };
 		0DC531492623CB5A00095F31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0DC5314B2623CB5B00095F31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DC5314E2623CB5B00095F31 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0DC531502623CB5B00095F31 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0DC531532623CB5B00095F31 /* PyreFox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PyreFox.xcdatamodel; sourceTree = "<group>"; };
 		0DC531552623CB5B00095F31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,9 +58,8 @@
 		0DA35E1E2623E79400FF2A98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0DC531502623CB5B00095F31 /* Persistence.swift */,
 				0DC531522623CB5B00095F31 /* PyreFox.xcdatamodeld */,
-				0D32B1362636155900DEA50A /* webViewComponents.swift */,
+				0D32B1362636155900DEA50A /* webViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -80,8 +67,6 @@
 		0DA35E202623E7A300FF2A98 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0DA35E22262400DC00FF2A98 /* BookmarksView.swift */,
-				0DA35E272624151300FF2A98 /* BookmarksViewRow.swift */,
 				0D9BD829262C000900B6F38D /* websiteView.swift */,
 				0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */,
 				0D32B12B263128A400DEA50A /* BottomNavBarView.swift */,
@@ -92,7 +77,6 @@
 		0DA35E2D262811D800FF2A98 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0DA35E2E262811F200FF2A98 /* BookmarkCheck.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -100,8 +84,6 @@
 		0DC5313B2623CB5A00095F31 = {
 			isa = PBXGroup;
 			children = (
-				0DA35E312628142100FF2A98 /* Bookmark+CoreDataClass.swift */,
-				0DA35E322628142100FF2A98 /* Bookmark+CoreDataProperties.swift */,
 				0DC531462623CB5A00095F31 /* PyreFox */,
 				0DC531452623CB5A00095F31 /* Products */,
 			);
@@ -211,18 +193,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D32B12C263128A400DEA50A /* BottomNavBarView.swift in Sources */,
-				0DC531512623CB5B00095F31 /* Persistence.swift in Sources */,
-				0DA35E2F262811F200FF2A98 /* BookmarkCheck.swift in Sources */,
-				0DA35E342628142100FF2A98 /* Bookmark+CoreDataProperties.swift in Sources */,
 				0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */,
 				0DC531542623CB5B00095F31 /* PyreFox.xcdatamodeld in Sources */,
 				0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */,
 				0DC5314A2623CB5A00095F31 /* ContentView.swift in Sources */,
-				0DA35E332628142100FF2A98 /* Bookmark+CoreDataClass.swift in Sources */,
 				0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */,
-				0DA35E282624151300FF2A98 /* BookmarksViewRow.swift in Sources */,
-				0DA35E23262400DC00FF2A98 /* BookmarksView.swift in Sources */,
-				0D32B1372636155900DEA50A /* webViewComponents.swift in Sources */,
+				0D32B1372636155900DEA50A /* webViewModel.swift in Sources */,
 				0DC531482623CB5A00095F31 /* PyreFoxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

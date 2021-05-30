@@ -1,10 +1,3 @@
-//
-//  BottomNavBarView.swift
-//  PyreFox
-//
-//  Created by Sharif Uzzell on 4/21/21.
-//
-
 import SwiftUI
 struct BottomNavBarView: View {
     @ObservedObject var viewModel: WebViewModel
@@ -24,7 +17,6 @@ struct BottomNavBarView: View {
                         
                     }
                     .padding(.leading, 5)
-                    
                     
                     Button(action:{
                         print("RIGHT:")
@@ -62,8 +54,6 @@ struct BottomNavBarView: View {
                         .padding(5)
                 }
                 Spacer()
-                
-                
             }
             Spacer()
         }

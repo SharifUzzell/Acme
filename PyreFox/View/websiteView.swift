@@ -1,11 +1,3 @@
-//
-//  WebView.swift
-//  SwiftUIWebView
-//
-//  Created by Md. Yamin on 4/25/20.
-//  Copyright © 2020 Md. Yamin. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import SwiftUI
@@ -34,22 +26,12 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
     }
     
     func makeUIView(context: Context) -> WKWebView {
-        let preferences = WKPreferences()
-        let configuration = WKWebViewConfiguration()
-        configuration.userContentController.add(self.makeCoordinator(), name: "iOSNative")
-        configuration.preferences = preferences
-        
-        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        let webView = WKWebView(frame: CGRect.zero)
         webView.navigationDelegate = context.coordinator
-        
-        //remove after debugging...
-        webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.isScrollEnabled = true
         webView.load(URLRequest(url: URL(string: viewModel.url)!))
-        print("UUUUUUUUUUUUUUUUUUUUU " + viewModel.url)
         return webView
     }
-    
     
     func updateUIView(_ webView: WKWebView, context: Context) {
     }
@@ -80,35 +62,13 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                 guard let title = response as? String else {
                     return
                 }
-                
                 self.parent.viewModel.showWebTitle.send(title)
-                
-                guard let url = webView.url else {
-                    return
-                }
-              
-                print("OUHFOUSDOHSOFHOSFHIOUSHJFOSHFOFHOSHFOUIH    " + url.absoluteString)
-                
-            }
-            
-            valueSubscriber = parent.viewModel.valuePublisher.receive(on: RunLoop.main).sink(receiveValue: { value in
-                let javascriptFunction = "valueGotFromIOS(\(value));"
-                webView.evaluateJavaScript(javascriptFunction) { (response, error) in
-                    if let error = error {
-                        print("Error calling javascript:valueGotFromIOS()")
-                        print(error.localizedDescription)
-                    } else {
-                        print("Called javascript:valueGotFromIOS()")
-                    }
-                }
-            })
+                self.parent.viewModel.url = webView.url!.absoluteString
+        }
             
             // Page loaded so no need to show loader anymore
             self.parent.viewModel.showLoader.send(false)
         }
-        
-        /* Here I implemented most of the WKWebView's delegate functions so that you can know them and
-         can use them in different necessary purposes */
         
         func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
             // Hides loader
@@ -143,17 +103,9 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                     webView.reload()
                 case .load:
                     webView.load(URLRequest(url: URL(string: self.parent.viewModel.url)!))
-                    print("IIIIIIIIIIIIIIIIIIIII  " +  self.parent.viewModel.url)
+                    
                 }
-                
             })
-        }
-        
-        // This function is essential for intercepting every navigation in the webview
-        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            // Suppose you don't want your user to go a restricted site
-            // Here you can get many information about new url from 'navigationAction.request.description'
-            decisionHandler(.allow)
         }
     }
 }
@@ -161,7 +113,6 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
 // MARK: - Extensions
 extension WebView.Coordinator: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        // Make sure that your passed delegate is called
         if message.name == "iOSNative" {
             if let body = message.body as? [String: Any?] {
                 delegate?.receivedJsonValueFromWebView(value: body)

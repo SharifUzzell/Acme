@@ -17,19 +17,15 @@ struct BrowserPage: View, Identifiable{
             
             BottomNavBarView(viewModel: viewModel)
                 .padding(.bottom, 25)
-           
         }
-        
-        
     }
 }
 
 
-//struct BrowserPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BrowserPage()
-//
-//        BrowserPage()
-//            .preferredColorScheme(.dark)
-//    }
-//}
+struct BrowserPage_Previews: PreviewProvider {
+    static var previews: some View {
+        BrowserPage()
+        BrowserPage()
+            .preferredColorScheme(.dark)
+    }
+}
