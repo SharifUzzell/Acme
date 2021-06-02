@@ -12,6 +12,7 @@
 		0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD829262C000900B6F38D /* websiteView.swift */; };
 		0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */; };
 		0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD852262D42F100B6F38D /* BrowserPage.swift */; };
+		0DC0BB27266746B9006CC03F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC0BB26266746B9006CC03F /* Launch Screen.storyboard */; };
 		0DC531482623CB5A00095F31 /* AcmeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531472623CB5A00095F31 /* AcmeApp.swift */; };
 		0DC5314A2623CB5A00095F31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531492623CB5A00095F31 /* ContentView.swift */; };
 		0DC5314C2623CB5B00095F31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC5314B2623CB5B00095F31 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		0D9BD829262C000900B6F38D /* websiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = websiteView.swift; sourceTree = "<group>"; };
 		0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBarView.swift; sourceTree = "<group>"; };
 		0D9BD852262D42F100B6F38D /* BrowserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserPage.swift; sourceTree = "<group>"; };
+		0DC0BB26266746B9006CC03F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0DC531442623CB5A00095F31 /* Acme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC531472623CB5A00095F31 /* AcmeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcmeApp.swift; sourceTree = "<group>"; };
 		0DC531492623CB5A00095F31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 				0DC531472623CB5A00095F31 /* AcmeApp.swift */,
 				0DC531492623CB5A00095F31 /* ContentView.swift */,
 				0D9BD852262D42F100B6F38D /* BrowserPage.swift */,
+				0DC0BB26266746B9006CC03F /* Launch Screen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DC0BB27266746B9006CC03F /* Launch Screen.storyboard in Resources */,
 				0DC5314F2623CB5B00095F31 /* Preview Assets.xcassets in Resources */,
 				0DC5314C2623CB5B00095F31 /* Assets.xcassets in Resources */,
 			);

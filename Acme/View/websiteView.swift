@@ -102,8 +102,15 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                 case .reload:
                     webView.reload()
                 case .load:
-                    webView.load(URLRequest(url: URL(string: self.parent.viewModel.url)!))
-                    
+                    var url: String = self.parent.$viewModel.url.wrappedValue.lowercased()
+                    if url.hasPrefix("www.") {
+                        url = "https://" + url
+                    }
+                    if !(url.hasPrefix("https://") || url.hasPrefix("http://")) {
+                        let words = url.replacingOccurrences(of: " ", with: "%20")
+                        url = "https://www.google.com/search?q=" + words
+                    }
+                    webView.load(URLRequest(url: URL(string: url)!))
                 }
             })
         }
