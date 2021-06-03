@@ -102,14 +102,17 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                     webView.reload()
                 case .load:
                     var url: String = self.parent.$viewModel.url.wrappedValue.lowercased()
-                    if url.hasPrefix("www.") {
-                        url = "https://" + url
+
+                    if !url.isEmpty {
+                        if url.hasPrefix("www.") {
+                            url = "https://" + url
+                        }
+                        if !(url.hasPrefix("https://") || url.hasPrefix("http://")) {
+                            let words = url.replacingOccurrences(of: " ", with: "%20")
+                            url = "https://www.google.com/search?q=" + words
+                        }
+                        webView.load(URLRequest(url: URL(string: url)!))
                     }
-                    if !(url.hasPrefix("https://") || url.hasPrefix("http://")) {
-                        let words = url.replacingOccurrences(of: " ", with: "%20")
-                        url = "https://www.google.com/search?q=" + words
-                    }
-                    webView.load(URLRequest(url: URL(string: url)!))
                 }
             })
         }
