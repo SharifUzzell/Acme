@@ -9,8 +9,7 @@ protocol WebViewHandlerDelegate {
     func receivedStringValueFromWebView(value: String)
 }
 
-struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
-   
+struct WebView: UIViewRepresentable, WebViewHandlerDelegate {   
     func receivedJsonValueFromWebView(value: [String : Any?]) {
         print("JSON value received from web is: \(value)")
     }
@@ -62,7 +61,7 @@ struct WebView: UIViewRepresentable, WebViewHandlerDelegate {
                 guard let title = response as? String else {
                     return
                 }
-                self.parent.viewModel.showWebTitle.send(title)
+                self.parent.viewModel.showWebTitle = title
                 self.parent.viewModel.url = webView.url!.absoluteString
         }
             

@@ -1,6 +1,9 @@
 import SwiftUI
 struct BottomNavBarView: View {
     @ObservedObject var viewModel: WebViewModel
+    @State var isShowingBookmarks = false
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     var body: some View {
         HStack {
             Spacer()
@@ -35,6 +38,7 @@ struct BottomNavBarView: View {
                     HStack{
                         Button(action:{
                             print("TAB:")
+                            isShowingBookmarks.toggle()
                         }) {
                             Image(systemName: "square.fill.on.square")
                                 .font(.system(size: 35))
@@ -43,9 +47,18 @@ struct BottomNavBarView: View {
                         }
                     }
                 }
+                .sheet(isPresented: $isShowingBookmarks, content: {
+                    BookmarksView(isShowing: $isShowingBookmarks, viewModel: viewModel)
+                        .environment(\.managedObjectContext, self.managedObjectContext)
+                })
+
                 
                 Button(action:{
                     print("PLUS:")
+                    let bookmark = Bookmark(context: managedObjectContext)
+                    bookmark.name = viewModel.showWebTitle
+                    bookmark.url = viewModel.url
+                    PersistenceController.shared.saveContext()
                     
                 }) {
                     Image(systemName: "plus.circle.fill")

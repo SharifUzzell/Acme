@@ -13,11 +13,14 @@
 		0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */; };
 		0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BD852262D42F100B6F38D /* BrowserPage.swift */; };
 		0DC0BB27266746B9006CC03F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC0BB26266746B9006CC03F /* Launch Screen.storyboard */; };
+		0DC0BB2C26675084006CC03F /* BookmarksViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0BB2A26675084006CC03F /* BookmarksViewRow.swift */; };
+		0DC0BB2D26675084006CC03F /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0BB2B26675084006CC03F /* BookmarksView.swift */; };
+		0DC0BB3026687F6D006CC03F /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0BB2E26687F6D006CC03F /* Main.xcdatamodeld */; };
+		0DC0BB3226687FF1006CC03F /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0BB3126687FF1006CC03F /* PersistenceController.swift */; };
 		0DC531482623CB5A00095F31 /* AcmeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531472623CB5A00095F31 /* AcmeApp.swift */; };
 		0DC5314A2623CB5A00095F31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531492623CB5A00095F31 /* ContentView.swift */; };
 		0DC5314C2623CB5B00095F31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC5314B2623CB5B00095F31 /* Assets.xcassets */; };
 		0DC5314F2623CB5B00095F31 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC5314E2623CB5B00095F31 /* Preview Assets.xcassets */; };
-		0DC531542623CB5B00095F31 /* Acme.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DC531522623CB5B00095F31 /* Acme.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,12 +30,15 @@
 		0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBarView.swift; sourceTree = "<group>"; };
 		0D9BD852262D42F100B6F38D /* BrowserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserPage.swift; sourceTree = "<group>"; };
 		0DC0BB26266746B9006CC03F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0DC0BB2A26675084006CC03F /* BookmarksViewRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksViewRow.swift; sourceTree = "<group>"; };
+		0DC0BB2B26675084006CC03F /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		0DC0BB2F26687F6D006CC03F /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
+		0DC0BB3126687FF1006CC03F /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		0DC531442623CB5A00095F31 /* Acme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC531472623CB5A00095F31 /* AcmeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcmeApp.swift; sourceTree = "<group>"; };
 		0DC531492623CB5A00095F31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0DC5314B2623CB5B00095F31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DC5314E2623CB5B00095F31 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0DC531532623CB5B00095F31 /* PyreFox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PyreFox.xcdatamodel; sourceTree = "<group>"; };
 		0DC531552623CB5B00095F31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,8 +67,9 @@
 		0DA35E1E2623E79400FF2A98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0DC531522623CB5B00095F31 /* Acme.xcdatamodeld */,
 				0D32B1362636155900DEA50A /* webViewModel.swift */,
+				0DC0BB2E26687F6D006CC03F /* Main.xcdatamodeld */,
+				0DC0BB3126687FF1006CC03F /* PersistenceController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -70,6 +77,8 @@
 		0DA35E202623E7A300FF2A98 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0DC0BB2B26675084006CC03F /* BookmarksView.swift */,
+				0DC0BB2A26675084006CC03F /* BookmarksViewRow.swift */,
 				0D9BD829262C000900B6F38D /* websiteView.swift */,
 				0D9BD84F262D3EDD00B6F38D /* URLBarView.swift */,
 				0D32B12B263128A400DEA50A /* BottomNavBarView.swift */,
@@ -197,12 +206,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D32B12C263128A400DEA50A /* BottomNavBarView.swift in Sources */,
+				0DC0BB3026687F6D006CC03F /* Main.xcdatamodeld in Sources */,
 				0D9BD850262D3EDD00B6F38D /* URLBarView.swift in Sources */,
-				0DC531542623CB5B00095F31 /* Acme.xcdatamodeld in Sources */,
 				0D9BD853262D42F100B6F38D /* BrowserPage.swift in Sources */,
+				0DC0BB3226687FF1006CC03F /* PersistenceController.swift in Sources */,
 				0DC5314A2623CB5A00095F31 /* ContentView.swift in Sources */,
 				0D9BD82A262C000900B6F38D /* websiteView.swift in Sources */,
+				0DC0BB2C26675084006CC03F /* BookmarksViewRow.swift in Sources */,
 				0D32B1372636155900DEA50A /* webViewModel.swift in Sources */,
+				0DC0BB2D26675084006CC03F /* BookmarksView.swift in Sources */,
 				0DC531482623CB5A00095F31 /* AcmeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,13 +406,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0DC531522623CB5B00095F31 /* Acme.xcdatamodeld */ = {
+		0DC0BB2E26687F6D006CC03F /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0DC531532623CB5B00095F31 /* PyreFox.xcdatamodel */,
+				0DC0BB2F26687F6D006CC03F /* Main.xcdatamodel */,
 			);
-			currentVersion = 0DC531532623CB5B00095F31 /* PyreFox.xcdatamodel */;
-			path = Acme.xcdatamodeld;
+			currentVersion = 0DC0BB2F26687F6D006CC03F /* Main.xcdatamodel */;
+			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

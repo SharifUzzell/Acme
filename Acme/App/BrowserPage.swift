@@ -1,10 +1,7 @@
 
 import SwiftUI
 
-struct BrowserPage: View, Identifiable{
-  
-    let id: UUID = UUID()
-    
+struct BrowserPage: View{
     @ObservedObject var viewModel = WebViewModel()
     
     var body: some View {
