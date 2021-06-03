@@ -2,6 +2,8 @@ import SwiftUI
 
 struct URLBarView: View {
     @ObservedObject var viewModel: WebViewModel
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     var body: some View {
         VStack {
             HStack{
@@ -30,6 +32,18 @@ struct URLBarView: View {
                 .padding(5)
                 .cornerRadius(4.0)
                 .background(Capsule().strokeBorder(Color("TextColor"), lineWidth: 1.25 ))
+                Button(action:{
+                    let bookmark = Bookmark(context: managedObjectContext)
+                    bookmark.name = viewModel.showWebTitle
+                    bookmark.url = viewModel.url
+                    PersistenceController.shared.saveContext()
+                    
+                }) {
+                    Image(systemName: "bookmark.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(Color.accentColor)
+                        .padding(5)
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 10)
